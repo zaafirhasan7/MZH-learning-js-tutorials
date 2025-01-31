@@ -12,4 +12,7 @@ var upperCase_H = sliced_h.toUpperCase();
 var restOfText = question.slice(1);
 var lowerCaseRestOfText = restOfText.toLowerCase();
 var outputSentence = upperCase_H + lowerCaseRestOfText;
-console.log (outputSentence);
+// console.log (outputSentence);
+
+// output in one line
+console.log(question[0].toUpperCase() + question.slice(1).toLowerCase());
