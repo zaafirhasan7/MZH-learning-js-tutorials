@@ -43,3 +43,12 @@ console.log (stringNumber == actualNumber);// true
 console.log (0 == false);// true
 
 console.log ("false" == true);// false 
+
+// Cinema entering conditions
+var age = 14;
+var accompanied = false;
+if ((age > 13 || (age <= 13 && accompanied == true))){
+    console.log("Yeppy! I can enter the cinema!")
+} else {
+    console.log("Noooo! I can't enter the cinema!")
+}
