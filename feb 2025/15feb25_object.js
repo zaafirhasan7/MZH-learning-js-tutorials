@@ -20,6 +20,8 @@ var student1 =  {
 console.log(student1['cat']);
 
 console.log(harmonyCat['color name']);
+
+// cant use spaed keys for dot(.) notation
 // console.log(harmonyCat.color Name); // there is NO WAY you can use dot notation using spaced key
 
 var keys = ["name", "toys", "color name"];
