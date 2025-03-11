@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hangman!</title>
+</head>
+<body>
+    <h1>Hangman Game!</h1>
+    <script>
+        var words = [
+            "pizza",
+            "sushi",
+            "burger",
+            "spagetti",
+            "shawarma",
+            "waffles",
+            "fries"
+        ];
+        // pick a random word
+        var word = words[Math.floor(Math.random() * words.length)];
+       console.log(word);
+       
+        var remainingLetters = word.length;
+        // console.log(remainingLetters);
+        
+        while (remainingLetters > 0) {
+            
+            remainingLetters--;
+             
+        };
+        
+          
+    </script>
+</body>
+</html>
