@@ -7,13 +7,21 @@
     <h1>Hangman Game!</h1>
     <script>
         var words = [
-            "pizza",
-            "sushi",
-            "burger",
-            "spagetti",
-            "shawarma",
-            "waffles",
-            "fries"
+            // "pizza",
+            // "sushi",
+            // "burger", // r => indecies = [2,5]
+            // "spagetti",
+            // "shawarma",
+            // "waffles",
+            "fries",
+            "mango",
+            "grapes",
+            "cake",
+            "bread",
+            "corn",
+            "fig",
+            "soup",
+            "stew"
         ];
         // pick a random word
         var word = words[Math.floor(Math.random() * words.length)];
@@ -22,11 +30,41 @@
         var remainingLetters = word.length;
         // console.log(remainingLetters);
         
+        var answerArray = []
+        for (var i = 0; i < word.length; i++) {
+            answerArray[i] = "_";
+        }
+
         while (remainingLetters > 0) {
+            // Show the player their current progress
+            alert (answerArray.join(" "))
             
-            remainingLetters--;
-             
+            // 	Get a guess from the player
+            var guess = prompt ("please enter a single letter as your guess!")
+            
+            if (guess === null) {
+                break;
+            } else if (guess.length > 1) {
+                alert ("please type a SINGLE letter")
+            } else {
+                // checking if the guess is in the word
+                if (word.includes(guess)) {
+                    // Update the players progress with the guess
+                    
+                    // finding the index of the guess
+                    var index = word.indexOf(guess);
+
+                    // update the answerArray with the guess
+                    // ["_", "_", "_", ....]
+                    answerArray[index] = guess;   
+                    remainingLetters--;
+                }
+            }             
         };
+
+        if (remainingLetters === 0) {
+            alert ("wow, the word was " + word.toUpperCase());
+        }
         
           
     </script>
