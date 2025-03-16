@@ -41,6 +41,8 @@ function multiplyByTwo(x) {
     var multipliedByTwo = x * 2;
     return multipliedByTwo;
 }
-var output = multiplyByTwo(3);
+
+var arr = ['hello', 'hi'];
+var output = multiplyByTwo("klhjsdfghj"); // NaN
 console.log(output);
 
