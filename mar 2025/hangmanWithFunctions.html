@@ -6,23 +6,13 @@
     <title>Hangman</title>
 </head>
 <body>
-   <script>
-    function appendToString(char, str = "") {
-    str += char;
-    return str;
-}
-var firstWord = appendToString(' ','good');
-var secondWord = appendToString('r','ca');
-console.log(firstWord + secondWord);
-
-var words = ["rose", "lavender", "daisy", "dandelion" ]
-function pickWord () {
-    var ranIdx = Math.floor(Math.random() * words.length);
-    return words[ranIdx]; 
-}
-
-console.log(pickWord());
-
+    <script>
+        function pickWord () {
+            var words = ["rose", "lavender", "daisy", "dandelion" ];
+            var ranIdx = Math.floor(Math.random() * words.length);
+            return words[ranIdx]; 
+        }
+        console.log(pickWord());
    </script> 
 </body>
 </html>
