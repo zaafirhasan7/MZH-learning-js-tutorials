@@ -1,4 +1,6 @@
 {
     // ...existing settings...
-    "github.copilot.enable": false
+    "github.copilot.enable": {
+        "*": false
+    }
 }
