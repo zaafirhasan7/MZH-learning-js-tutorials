@@ -10,28 +10,29 @@ function movingH1Element () {
   ];
   $("#heading").offset(arr[i]);
 
-  i= (i+1) % arr.length; // 0+1=1%4=1, 1+1=2%4=2, 2+1=3%4=3, 3+1=4%4=0, 0+1=1%4=1 
+  i= (i+1) % arr.length; 
 };
 
-
 var intervalTime= 1000;
+var intervalId = setInterval(movingH1Element, intervalTime);
+
+
 var counter = 1;
 $("#heading").click(()=>{
-  // start animation
-  var newIntervalId = setInterval(movingH1Element, intervalTime);
+  // cancel the old interval
+  clearInterval(intervalId);
+
+  if (counter >= 10) {
+    $("#heading").text("you win");
+    return;
+  }
+   
+  // decrease interval time
+  intervalTime -= 80;
+  // start new interval
+  intervalId = setInterval(movingH1Element, intervalTime);
 
   // change text
   $("#heading").text(counter);
   counter++;
-
-  // cancel interval
-  clearInterval(newIntervalId);
-
-  // reduce interval time
-  intervalTime = intervalTime - 5;
-  
-  if (counter === 10) {
-    $("#heading").text("you win")
-  }
-  console.log(intervalTime);
 });
