@@ -1,7 +1,7 @@
 class RobloxCharacter {
 
     constructor(name, avatar, health) {
-        // we will set all those arguments as the RobloxCharacter's propertiesw 
+        // the RobloxCharacter's properties 
         this.name = name;
         this.avatar = avatar;
         this.health = health;
@@ -36,9 +36,26 @@ voidKnight.healingDamage(healthApple);
 var barbarian = new RobloxCharacter ("barbarian", "viking armor", 110);
 barbarian.sayHello();
 
-var charcter3 = new RobloxCharacter('charcter 3', "green armor", 120);
-var charcter4 = new RobloxCharacter('charcter 4', "blue armor", 110);
+
+// Extension - //! Inheritence
+class RobloxCharacterWithTeam extends RobloxCharacter {
+    constructor (name, avatar, health, team){
+        // this.name = name;
+        // this.avatar = avatar;
+        // this.health = health;
+        super(name, avatar, health); // calling parent's constructor
+        this.team = team; // new property
+    }
+
+    showTeamName(){
+        console.log(`I am ${this.name} and my team is: ${this.team}`);
+    }
+}
 
 
+var mrGreen = new RobloxCharacterWithTeam('Mr. Green Hasan', "green armor", 120, "Greeny");
+
+mrGreen.sayHello();
+mrGreen.showTeamName();
 
 
