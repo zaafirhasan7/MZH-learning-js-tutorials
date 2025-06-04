@@ -25,8 +25,16 @@ class Car {
     $("body").append(this.carElement);
   }
 
-  moveRight() {
-    this.x += this.speed;
+  moveRight(speed) {
+    this.x += speed;
+    this.carElement.css({
+      left: this.x,
+      top: this.y,
+    });
+  }
+
+  moveLeft(speed) {
+    this.x -= speed;
 
     this.carElement.css({
       left: this.x,
@@ -34,8 +42,8 @@ class Car {
     });
   }
 
-  moveLeft() {
-    this.x -= this.speed;
+  moveUp(speed) {
+    this.y -= speed;
 
     this.carElement.css({
       left: this.x,
@@ -43,8 +51,8 @@ class Car {
     });
   }
 
-  moveUp() {
-    this.y -= this.speed;
+  moveDown(speed) {
+    this.y += speed;
 
     this.carElement.css({
       left: this.x,
@@ -53,39 +61,52 @@ class Car {
   }
 }
 
-var acura = new Car(20, 20, "http://nostarch.com/images/car.png", 15);
-var nissan = new Car(100, 200, "http://nostarch.com/images/car.png", 10);
+var acura = new Car(20, 20, "http://nostarch.com/images/car.png", 10);
+var nissan = new Car(20, 200, "http://nostarch.com/images/car.png", 10);
 // var apollo = new Car(10, 350, "https://www.motorbiscuit.com/wp-content/uploads/2021/11/Apollo-EVO-Apollo-3-scaled.jpeg")
 
-// apollo.draw();
+// setInterval(() => {
+//   nissan.moveRight(10);
+// }, Math.floor(1, 2, 3, 4, 5));
 
-// 5 != 100
-// 95 != 100
-// 100 != 100 False
-// while(acura.x !== nissan.x){
-// acura.moveRight();
-// }
-
-setInterval(() => {
-  nissan.moveRight();
-}, 45);
+// setInterval(() => {
+//   acura.moveRight(11);
+// }, Math.floor(1, 2, 3, 4, 5));
 
 // right arrow key used to move right side
 $(document).keydown((event) => {
   if (event.keyCode == 39) {
-    acura.moveRight();
+    acura.moveRight(10);
   }
 });
 
 // left arrow key used to move left side
 $(document).keydown((event) => {
   if (event.keyCode == 37) {
-    acura.moveLeft();
+    acura.moveLeft(10);
   }
 });
 
 $(document).keydown((event) => {
   if (event.keyCode == 38) {
-    acura.moveUp();
+    acura.moveUp(10);
+  }
+});
+
+$(document).keydown((event) => {
+  if (event.keyCode == 40) {
+    acura.moveDown(10);
+  }
+});
+
+$(document).keydown((event) => {
+  if (event.keyCode == 32) {
+    setInterval(() => {
+      nissan.moveRight(10);
+    }, Math.floor(1, 2, 3, 4, 5));
+
+    setInterval(() => {
+      acura.moveRight(11);
+    }, Math.floor(1, 2, 3, 4, 5));
   }
 });
