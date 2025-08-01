@@ -5,6 +5,10 @@
 </head>
 <body>
     <h1>Hangman Game!</h1>
+    <div id="progress"></div>
+    <canvas id="canvas" height="600" width="1920"></canvas>
+    <script src="../July 2025/31July25.js"></script>
+
     <script>
         var words = [
             // "pizza",
@@ -13,13 +17,13 @@
             // "spagetti",
             // "shawarma",
             // "waffles",
+            "fig",
             "fries",
             "mango",
             "grapes",
             "cake",
             "bread",
             "corn",
-            "fig",
             "soup",
             "stew"
         ];
@@ -30,23 +34,25 @@
         var remainingLetters = word.length;
         // console.log(remainingLetters);
         
-        var answerArray = []
+        var answerArray = [];
         for (var i = 0; i < word.length; i++) {
             answerArray[i] = "_";
         }
-
+        document.getElementById("progress").innerHTML = answerArray.join(" ");
+        
+        var mistakes = 0;
         while (remainingLetters > 0) {
             // Show the player their current progress
-            alert (answerArray.join(" "))
             
             // 	Get a guess from the player
             var guess = prompt ("please enter a single letter as your guess!")
+            console.log(guess);
             
-            if (guess === null) {
+            if (guess === null || guess === undefined) {
                 break;
-            } else if (guess.length > 1) {
-                alert ("please type a SINGLE letter")
-            } else {
+            } else if (guess.length===0 || guess.length > 1) {
+                alert ("Please type a SINGLE letter!");
+            } else { // 1,":", "s",
                 // checking if the guess is in the word
                 if (word.includes(guess)) {
                     // Update the players progress with the guess
@@ -55,9 +61,16 @@
                     var index = word.indexOf(guess);
 
                     // update the answerArray with the guess
-                    // ["_", "_", "_", ....]
-                    answerArray[index] = guess;   
+                    // ["f", "i", "g", ....]
+                    answerArray[index] = guess;  
+                    document.getElementById("progress").innerHTML = answerArray.join(" ");
+                    
                     remainingLetters--;
+                } else {
+                    ++mistakes;
+                    console.log("mistakes " + mistakes);
+
+                    hangmanDrawer(mistakes);
                 }
             }             
         };
@@ -65,8 +78,7 @@
         if (remainingLetters === 0) {
             alert ("wow, the word was " + word.toUpperCase());
         }
-        
-          
+
     </script>
+
 </body>
-</html>
