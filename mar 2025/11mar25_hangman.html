@@ -2,14 +2,104 @@
 <html lang="en">
 <head>
     <title>Hangman!</title>
+
+    <style>
+    #progress {
+        padding-bottom: 20px;
+        color: #c91111;
+    }
+
+    #infoText {
+        padding-bottom: 10px;
+    }
+
+    #newGame {
+        color: aliceblue;
+        background-color: rgb(36, 122, 93);
+        border-radius: 6px;
+        border: none;
+        padding: 2px 10px;
+        cursor: pointer;
+    }
+
+    #newGame:hover {
+        color: aliceblue;
+        background-color: rgb(5, 75, 52);
+    }
+
+    #newGameGroup{
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    </style>
 </head>
+
 <body>
     <h1>Hangman Game!</h1>
-    <div id="progress"></div>
+
+    <div id="newGameGroup">
+        <div id="progress"></div>
+        <input id="newGame" type="button" value="New game" onclick="newGameHandler()"/> 
+    </div>
+    
+    <div id="infoText">Please enter a single letter</div>
+    <input id="userInput" type="text"/> 
+    <input id="submit" type="button" value="Submit" onclick="submitHandler()"/> 
     <canvas id="canvas" height="600" width="1920"></canvas>
     <script src="../July 2025/31July25.js"></script>
 
     <script>
+        // clear the text input
+        document.getElementById("userInput").value = ""; 
+        var guess = "";
+        var mistakes = 0;
+    
+        function submitHandler () {
+            // read user input text
+            guess = document.getElementById("userInput").value;
+            
+            // check correct or not
+            if (guess === null || guess === undefined) {
+                alert ("Please type a SINGLE letter!");
+            } else if (guess.length===0 || guess.length > 1) {
+                alert ("Please type a SINGLE letter!");
+            } else { // 1,":", "s",
+                // checking if the guess is in the word
+                if (word.includes(guess)) {
+                    // finding the index of the guess
+                    var index = word.indexOf(guess);
+
+                    // update the answerArray with the guess
+                    // ["f", "i", "g", ....]
+                    answerArray[index] = guess;  
+                    document.getElementById("progress").innerHTML = answerArray.join(" ");
+                    
+                    remainingLetters--;
+                    if (remainingLetters === 0) {
+                        setTimeout(()=>{
+                            alert ("Wow, you guessed it! The word is " + word.toUpperCase());
+                        }, 500);
+                    }
+                } else {
+                    ++mistakes;
+                    hangmanDrawer(mistakes);
+
+                    if (mistakes == 6) {
+                        setTimeout(()=>{
+                            alert("Max attempts reached!! You lost!");
+                        }, 700);
+                    }
+                }
+            }  
+
+            // clear the text input
+            document.getElementById("userInput").value = "";
+        }
+
+        function newGameHandler () {
+
+        };
         var words = [
             // "pizza",
             // "sushi",
@@ -18,14 +108,14 @@
             // "shawarma",
             // "waffles",
             "fig",
-            "fries",
-            "mango",
-            "grapes",
-            "cake",
-            "bread",
-            "corn",
-            "soup",
-            "stew"
+            // "fries",
+            // "mango",
+            // "grapes",
+            // "cake",
+            // "bread",
+            // "corn",
+            // "soup",
+            // "stew"
         ];
         // pick a random word
         var word = words[Math.floor(Math.random() * words.length)];
@@ -38,47 +128,10 @@
         for (var i = 0; i < word.length; i++) {
             answerArray[i] = "_";
         }
+
         document.getElementById("progress").innerHTML = answerArray.join(" ");
         
-        var mistakes = 0;
-        while (remainingLetters > 0) {
-            // Show the player their current progress
-            
-            // 	Get a guess from the player
-            var guess = prompt ("please enter a single letter as your guess!")
-            console.log(guess);
-            
-            if (guess === null || guess === undefined) {
-                break;
-            } else if (guess.length===0 || guess.length > 1) {
-                alert ("Please type a SINGLE letter!");
-            } else { // 1,":", "s",
-                // checking if the guess is in the word
-                if (word.includes(guess)) {
-                    // Update the players progress with the guess
-                    
-                    // finding the index of the guess
-                    var index = word.indexOf(guess);
-
-                    // update the answerArray with the guess
-                    // ["f", "i", "g", ....]
-                    answerArray[index] = guess;  
-                    document.getElementById("progress").innerHTML = answerArray.join(" ");
-                    
-                    remainingLetters--;
-                } else {
-                    ++mistakes;
-                    console.log("mistakes " + mistakes);
-
-                    hangmanDrawer(mistakes);
-                }
-            }             
-        };
-
-        if (remainingLetters === 0) {
-            alert ("wow, the word was " + word.toUpperCase());
-        }
-
+        
     </script>
 
 </body>

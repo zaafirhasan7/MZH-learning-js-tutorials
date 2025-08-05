@@ -2,7 +2,7 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
 function hangmanDrawer (mistakes) {
-    console.log("miastake coming from outside: " + mistakes);
+    // console.log("miastake coming from outside: " + mistakes);
     var x = 200;
     var y = 50;
     if (mistakes==1) {
