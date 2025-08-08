@@ -13,6 +13,10 @@
         padding-bottom: 10px;
     }
 
+    #submit {
+        cursor:pointer;
+    }
+
     #newGame {
         color: aliceblue;
         background-color: rgb(36, 122, 93);
@@ -43,7 +47,7 @@
         <input id="newGame" type="button" value="New game" onclick="newGameHandler()"/> 
     </div>
     
-    <div id="infoText">Please enter a single letter</div>
+    <div id="infoText">Please enter a single letter as your guess</div>
     <input id="userInput" type="text"/> 
     <input id="submit" type="button" value="Submit" onclick="submitHandler()"/> 
     <canvas id="canvas" height="600" width="1920"></canvas>
@@ -52,28 +56,56 @@
     <script>
         // clear the text input
         document.getElementById("userInput").value = ""; 
-        var guess = "";
-        var mistakes = 0;
-    
+
+        var words = [
+            // "burger", // r => indecies = [2,5]
+            "fig",
+            // "fries",
+            // "mango",
+            // "grapes",
+            "cake",
+            // "bread",
+            // "corn",
+            // "soup",
+            // "stew"
+        ];
+        
+        // pick a random word
+        var word = words[Math.floor(Math.random() * words.length)];
+        console.log(word);
+       
+        var remainingLetters = word.length;
+        // console.log(remainingLetters);
+        
+        var answers = [];
+        for (var i = 0; i < word.length; i++) {
+            answers[i] = "_";
+        }
+
+        document.getElementById("progress").innerHTML = answers.join(" ");
+        
         function submitHandler () {
+            var mistakes = 0;
             // read user input text
-            guess = document.getElementById("userInput").value;
+            var guessedLetter = document.getElementById("userInput").value;
+            console.log(guessedLetter);
             
             // check correct or not
-            if (guess === null || guess === undefined) {
-                alert ("Please type a SINGLE letter!");
-            } else if (guess.length===0 || guess.length > 1) {
-                alert ("Please type a SINGLE letter!");
-            } else { // 1,":", "s",
+            var alertText = "Please type a single letter at a time!";
+            if (guessedLetter === null || guessedLetter === undefined) {
+                alert (alertText);
+            } else if (guessedLetter.length===0 || guessedLetter.length > 1) {
+                alert (alertText);
+            } else { // single letter
                 // checking if the guess is in the word
-                if (word.includes(guess)) {
-                    // finding the index of the guess
-                    var index = word.indexOf(guess);
+                if (word.includes(guessedLetter)) {
+                    // finding the index of the guessed letter
+                    var index = word.indexOf(guessedLetter);
 
-                    // update the answerArray with the guess
+                    // update the answers array with the guessed letter
                     // ["f", "i", "g", ....]
-                    answerArray[index] = guess;  
-                    document.getElementById("progress").innerHTML = answerArray.join(" ");
+                    answers[index] = guessedLetter; // _ will be replaced by the guessed letter
+                    document.getElementById("progress").innerHTML = answers.join(" ");
                     
                     remainingLetters--;
                     if (remainingLetters === 0) {
@@ -100,38 +132,6 @@
         function newGameHandler () {
 
         };
-        var words = [
-            // "pizza",
-            // "sushi",
-            // "burger", // r => indecies = [2,5]
-            // "spagetti",
-            // "shawarma",
-            // "waffles",
-            "fig",
-            // "fries",
-            // "mango",
-            // "grapes",
-            // "cake",
-            // "bread",
-            // "corn",
-            // "soup",
-            // "stew"
-        ];
-        // pick a random word
-        var word = words[Math.floor(Math.random() * words.length)];
-       console.log(word);
-       
-        var remainingLetters = word.length;
-        // console.log(remainingLetters);
-        
-        var answerArray = [];
-        for (var i = 0; i < word.length; i++) {
-            answerArray[i] = "_";
-        }
-
-        document.getElementById("progress").innerHTML = answerArray.join(" ");
-        
-        
     </script>
 
 </body>
