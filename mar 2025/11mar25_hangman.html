@@ -39,7 +39,7 @@
     </style>
 </head>
 
-<body>
+ <body>
     <h1>Hangman Game!</h1>
 
     <div id="newGameGroup">
@@ -60,20 +60,20 @@
         var words = [
             // "burger", // r => indecies = [2,5]
             "fig",
-            // "fries",
-            // "mango",
-            // "grapes",
+            "fries",
+            "mango",
+            "grapes",
             "cake",
-            // "bread",
-            // "corn",
-            // "soup",
-            // "stew"
+            "bread",
+            "corn",
+            "soup",
+            "stew"
         ];
         
         // pick a random word
         var word = words[Math.floor(Math.random() * words.length)];
         console.log(word);
-       
+        
         var remainingLetters = word.length;
         // console.log(remainingLetters);
         
@@ -81,11 +81,11 @@
         for (var i = 0; i < word.length; i++) {
             answers[i] = "_";
         }
-
+        
         document.getElementById("progress").innerHTML = answers.join(" ");
         
+        var mistakes = 0;
         function submitHandler () {
-            var mistakes = 0;
             // read user input text
             var guessedLetter = document.getElementById("userInput").value;
             console.log(guessedLetter);
@@ -100,7 +100,7 @@
                 // checking if the guess is in the word
                 if (word.includes(guessedLetter)) {
                     // finding the index of the guessed letter
-                    var index = word.indexOf(guessedLetter);
+                    var index = word.indexOf(guessedLetter); // 1
 
                     // update the answers array with the guessed letter
                     // ["f", "i", "g", ....]
@@ -124,13 +124,34 @@
                     }
                 }
             }  
-
+            
             // clear the text input
             document.getElementById("userInput").value = "";
         }
-
+        
         function newGameHandler () {
+            // location.reload(); // not a wise solution
+            
+            // resetting variables
+            word = words[Math.floor(Math.random() * words.length)];
+            console.log(word);
+            remainingLetters = word.length;
 
+            answers=[];
+            for (var i = 0; i < word.length; i++) {
+                answers[i] = "_";
+            }
+            console.log(answers);
+
+            mistakes = 0;
+
+            // display clearing
+            document.getElementById("progress").innerHTML = answers.join(" ");
+            document.getElementById("userInput").value = "";
+            
+            // clearing the canvas
+            document.getElementById("canvas").getContext("2d").clearRect(0, 0, 1920, 600);
+            
         };
     </script>
 
