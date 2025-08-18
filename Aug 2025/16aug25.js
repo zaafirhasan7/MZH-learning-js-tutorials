@@ -45,9 +45,9 @@ function drawBee (x, y) {
 };
 
 function updateCoordinate (coordinate) {
-    // offset values ranged in between -2 and +2
+    // offset values ranged in between -2 and +1.96
     // lowest range: 0 * 4 - 2 = -2
-    // highest range: 1 * 4 - 2 = +2
+    // highest range: 0.99 * 4 - 2 = 3.99-2 = +1.96
     var offRange = 2;
     var offset = Math.random() * (offRange * 2) - offRange;
     coordinate += offset; // offset always must have positive or negative, we never subtract the offset value
