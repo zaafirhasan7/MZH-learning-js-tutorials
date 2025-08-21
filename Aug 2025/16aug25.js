@@ -53,10 +53,10 @@ function updateCoordinate (coordinate) {
     coordinate += offset; // offset always must have positive or negative, we never subtract the offset value
 
     if (coordinate > 200) {
-        coordinate = 200;
+        return 200;
     };
     if (coordinate < 0) {
-        coordinate = 0;
+        return 0;
     };
 
     return coordinate;
@@ -66,11 +66,13 @@ function updateCoordinate (coordinate) {
 var x = 100;
 var y = 100;
 
-setInterval(function () {
+var interval = setInterval(function () {
     ctx.clearRect(0, 0, width, height);
     drawBee(x, y);
-    x = updateCoordinate(x);
+    x = updateCoordinate(87.75); // 87.75-2 to 87.75+1.96
     y = updateCoordinate(y);
     ctx.strokeRect(0, 0, width, height);
+
 }, 30);
+
 
