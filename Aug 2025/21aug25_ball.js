@@ -1,12 +1,15 @@
 class Ball {
-    constructor (x, y, xSpeed, ySpeed, randcolor, width, height) {
+    constructor (x, y, randColor) {
+        var xSpeedRandomNum = Math.floor(Math.random()*11-5);//-5, 5 
+        var ySpeedRandomNum = Math.floor(Math.random()*11-5);//-5, 5 
+        
+        console.log(xSpeedRandomNum, ySpeedRandomNum);
+        
         this.x = x;
         this.y = y;
-        this.xSpeed = xSpeed;
-        this.ySpeed = ySpeed;
-        this.color = randcolor;
-        this.width = width;
-        this.length = length;
+        this.xSpeed = xSpeedRandomNum;
+        this.ySpeed = ySpeedRandomNum;
+        this.color = randColor;
     };
 
     draw (radius) {
@@ -18,17 +21,19 @@ class Ball {
         this.y = this.y + this.ySpeed;
     };
 
-    checkCollision () {  
+    checkCollision (canvasWidth, canvasHeight) {  
 
         // var randColor = generateRandomRGBColor();
         // console.log(randColor);
+        console.log(canvasWidth, canvasHeight);
         
-        if (this. == 0 || this.x == 500) {
+        
+        if (this.x < 0 || this.x > canvasWidth) {
             // ctx.fillStyle = randColor;
             this.xSpeed = -this.xSpeed;
         };
 
-        if (this.y == 0 || this.y == 300) {
+        if (this.y < 0 || this.y > canvasHeight) {
             // ctx.fillStyle = randColor;
             this.ySpeed = -this.ySpeed;
         };
@@ -36,47 +41,43 @@ class Ball {
 
 };
 
-function circle(x, y, radius, isFilled, color) {
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, 2*Math.PI, false);
-    if(!isFilled){
-        ctx.stroke();
-        ctx.strokeStyle = color;
-    } else {
-        ctx.fill();
-        ctx.fillStyle = color;
+    function circle(x, y, radius, isFilled, color) {
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, 2*Math.PI, false);
+        if(!isFilled){
+            ctx.stroke();
+            ctx.strokeStyle = color;
+        } else {
+            ctx.fill();
+            ctx.fillStyle = color;
+        };
     };
-};
 
-function generateRandomRGBColor() {
-    const red = Math.floor(Math.random() * 256);
-    const green = Math.floor(Math.random() * 256);
-    const blue = Math.floor(Math.random() * 256);
-    return `rgb(${red}, ${green}, ${blue})`; // rgb(118, 10, 118)
-}
-
-function pickRandomWord () {
-    // make an array of random colors
-    var colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"];
-    // choose a random color from the array
-    var randColorIdx = Math.floor(Math.random()* colors.length);
-    var randColor = colors[randColorIdx];
-    // return the selected random color
-    return randColor;
-};
+    function pickRandomWord () {
+        // make an array of random colors
+        var colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"];
+        // choose a random color from the array
+        var randColorIdx = Math.floor(Math.random()* colors.length);
+        var randColor = colors[randColorIdx];
+        // return the selected random color
+        return randColor;
+    };
 
 var canvas = document.getElementById("canvas");
+var canvasWidth = canvas.width;
+var canvasHeight = canvas.height;
 var ctx = canvas.getContext("2d");
-ctx.strokeRect(0,0,200,200); 
-var ball = new Ball(100, 100, -2, 4, pickRandomWord());
+ctx.strokeRect(0,0,canvasWidth,canvasHeight); 
+var ball = new Ball(100, 100, pickRandomWord());
 
  
 setInterval(()=> {
-    ctx.clearRect(0,0,900,300);
-    ctx.strokeRect(0,0,500,300);
+    ctx.clearRect(0,0,canvasWidth, canvasHeight);
+    ctx.stroke
+    ctx.strokeRect(0,0,canvasWidth,canvasHeight);
     ball.draw(6);
     ball.move();
-    ball.checkCollision();
+    ball.checkCollision(canvasWidth, canvasHeight);
 }, 30)
 
 
