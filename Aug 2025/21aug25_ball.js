@@ -3,13 +3,14 @@ class Ball {
         var xSpeedRandomNum = Math.floor(Math.random()*11-5);//-5, 5 
         var ySpeedRandomNum = Math.floor(Math.random()*11-5);//-5, 5 
         
-        console.log(xSpeedRandomNum, ySpeedRandomNum);
+        // console.log(xSpeedRandomNum, ySpeedRandomNum);
         
         this.x = x;
         this.y = y;
         this.xSpeed = xSpeedRandomNum;
         this.ySpeed = ySpeedRandomNum;
         this.color = randColor;
+        this.collisionCounter = 0;
     };
 
     draw (radius) {
@@ -21,21 +22,15 @@ class Ball {
         this.y = this.y + this.ySpeed;
     };
 
-    checkCollision (canvasWidth, canvasHeight) {  
-
-        // var randColor = generateRandomRGBColor();
-        // console.log(randColor);
-        console.log(canvasWidth, canvasHeight);
-        
-        
+    checkCollision (canvasWidth, canvasHeight) {         
         if (this.x < 0 || this.x > canvasWidth) {
-            // ctx.fillStyle = randColor;
             this.xSpeed = -this.xSpeed;
+            this.collisionCounter++;
         };
-
+        
         if (this.y < 0 || this.y > canvasHeight) {
-            // ctx.fillStyle = randColor;
             this.ySpeed = -this.ySpeed;
+            this.collisionCounter++;
         };
     };
 
@@ -53,9 +48,9 @@ class Ball {
         };
     };
 
-    function pickRandomWord () {
+    function pickRandomColor () {
         // make an array of random colors
-        var colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"];
+        var colors = ["Red", "maroon", "aquaMarine", "Orange", "Yellow", "Green", "Blue", "Purple"];
         // choose a random color from the array
         var randColorIdx = Math.floor(Math.random()* colors.length);
         var randColor = colors[randColorIdx];
@@ -67,17 +62,27 @@ var canvas = document.getElementById("canvas");
 var canvasWidth = canvas.width;
 var canvasHeight = canvas.height;
 var ctx = canvas.getContext("2d");
-ctx.strokeRect(0,0,canvasWidth,canvasHeight); 
-var ball = new Ball(100, 100, pickRandomWord());
+
+var ballArr = [];
+for (var i =0; i < 10; i++) {
+    ballArr[i] = new Ball(100, 100, pickRandomColor());
+};
+console.log(ballArr);
+
+
 
  
 setInterval(()=> {
     ctx.clearRect(0,0,canvasWidth, canvasHeight);
-    ctx.stroke
+    for (var j = 0; j < ballArr.length; j++) {
+        var ball = ballArr[j]; // retriving each ball indivisually
+        ball.draw(6);
+        ball.move();
+        ball.checkCollision(canvasWidth, canvasHeight);
+        console.log(ball.color, ball.collisionCounter);
+        
+    };
     ctx.strokeRect(0,0,canvasWidth,canvasHeight);
-    ball.draw(6);
-    ball.move();
-    ball.checkCollision(canvasWidth, canvasHeight);
 }, 30)
 
 
@@ -86,3 +91,9 @@ setInterval(()=> {
 // constuctor assigns this random color to the color property of ball
 // color property passed to draw function
 // now, draw function calls circle function with the color property 
+
+// challenge 3
+// making an empty array of balls
+// adding 10 new balls to the array by using a for loop
+// in the set interval function, we will be retriving each
+// ball by another for loop and call the draw, move, and check collision methods
