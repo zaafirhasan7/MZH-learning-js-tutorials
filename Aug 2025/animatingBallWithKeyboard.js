@@ -11,16 +11,16 @@ class Ball {
         // assigning ball properties, x, y for ball's position. And xSpeed and ySpeed for ball's moving speed 
         this.x = width / 2;
         this.y = height / 2;
-        this.xSpeed = 5;
+        this.xSpeed = 5;// only right arrow key
         this.ySpeed = 0;
     };
     // making move function to help the ball to move and to check if touching any wall.
     // if it touches a wall, it will wrap around the canvas and come out the other side.
     // here we used the canvas width and height we made earlier
     move () {
-        this.x = this.x + this.xSpeed;
-        this.y = this.y + this.ySpeed;
-
+        this.x = this.x + this.xSpeed; // only right
+        this.y = this.y + this.ySpeed; // y will reamin same value
+        
         if (this.x < 0) {
             this.x = width;
         } else if (this.x > width) {
@@ -38,6 +38,25 @@ class Ball {
         circle(this.x, this.y, 10, true);
     };
 
+    setDirection (direction) {
+        if (direction === "right") {
+            this.xSpeed = 5;
+            this.ySpeed = 0;
+        } else if (direction === "left") {
+            this.xSpeed = -5;
+            this.ySpeed = 0;
+        } else if (direction === "up") {
+            this.xSpeed = 0;
+            this.ySpeed = -5;
+        }  else if (direction === "down") {
+            this.xSpeed = 0;
+            this.ySpeed = 5;
+        } else if (direction === "stop") {
+            this.xSpeed = 0;
+            this.ySpeed = 0;
+        };
+    };
+
     // checkCollision (canvasWidth, canvasHeight) {         
     //     if (this.x < 0 || this.x > canvasWidth) {
     //         this.xSpeed = -this.xSpeed;
@@ -53,10 +72,6 @@ class Ball {
 };
 // making a function circle to draw a circle by giving x, y, radius, and filled or not
 function circle(x, y, radius, isFilled) {
-    ctx.lineWidth = 2;
-    ctx.fillStyle = "gold";
-    ctx.strokeStyle = "black";
-
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, 2*Math.PI, false);
     if(isFilled === false){
