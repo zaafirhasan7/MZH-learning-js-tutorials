@@ -3,7 +3,7 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 // taking canva's width and height dynamically and use it later
 var width = canvas.width;
-var height = canvas.height
+var height = canvas.height;
 
 // making the ball class for giving movement, drawing, and sensing for the ball
 class Ball {
@@ -11,7 +11,7 @@ class Ball {
         // assigning ball properties, x, y for ball's position. And xSpeed and ySpeed for ball's moving speed 
         this.x = width / 2;
         this.y = height / 2;
-        this.xSpeed = 5;// only right arrow key
+        this.xSpeed = 2;// only right arrow key
         this.ySpeed = 0;
     };
     // making move function to help the ball to move and to check if touching any wall.
@@ -40,35 +40,22 @@ class Ball {
 
     setDirection (direction) {
         if (direction === "right") {
-            this.xSpeed = 5;
+            this.xSpeed = 2;
             this.ySpeed = 0;
         } else if (direction === "left") {
-            this.xSpeed = -5;
+            this.xSpeed = -2;
             this.ySpeed = 0;
         } else if (direction === "up") {
             this.xSpeed = 0;
-            this.ySpeed = -5;
+            this.ySpeed = -2;
         }  else if (direction === "down") {
             this.xSpeed = 0;
-            this.ySpeed = 5;
+            this.ySpeed = 2;
         } else if (direction === "stop") {
             this.xSpeed = 0;
             this.ySpeed = 0;
         };
     };
-
-    // checkCollision (canvasWidth, canvasHeight) {         
-    //     if (this.x < 0 || this.x > canvasWidth) {
-    //         this.xSpeed = -this.xSpeed;
-    //         this.collisionCounter++;
-    //     };
-        
-    //     if (this.y < 0 || this.y > canvasHeight) {
-    //         this.ySpeed = -this.ySpeed;
-    //         this.collisionCounter++;
-    //     };
-    // };
-
 };
 // making a function circle to draw a circle by giving x, y, radius, and filled or not
 function circle(x, y, radius, isFilled) {
@@ -81,30 +68,22 @@ function circle(x, y, radius, isFilled) {
     }
 };
 
-// document.addEventListener("keydown", (event) => {
-//     console.log(event.keyCode);
-// });
+var ball = new Ball();
 
-// in object order does not matter like it matters in array
-// making an object of different key codes with their values
-var keyNames = {
-    38: "up",
-    40: "down",
+var keyActions = {
+    32: "stop", 
     37: "left",
+    38: "up",
     39: "right",
-    32: "space",
-    16: "shift",
-    13: "enter",
-    18: "alt"
+    40: "down"
+};
 
-};
-// making a keydownhandler function to print key codes of specific keys and print the name of a
-// specific key which was set in the object instead of printing the keycode of it
-function keyDownHandler (event) {
-    console.log(keyNames[event.keyCode]);
-};
-// adding an event listener to check if a key is pressed or not
-document.addEventListener("keydown", keyDownHandler);
+// we set direction based on pressed key
+document.addEventListener("keyup", (event) => {
+    ball.setDirection(keyActions[event.keyCode]);
+});
+
+
 
 
 
