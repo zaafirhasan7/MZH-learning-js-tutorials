@@ -18,20 +18,25 @@ class Ball {
     // if it touches a wall, it will wrap around the canvas and come out the other side.
     // here we used the canvas width and height we made earlier
     move () {
+        if(this.x === 200){
+            var test = 1;
+        }
         this.x = this.x + this.xSpeed; // only right
         this.y = this.y + this.ySpeed; // y will reamin same value
         
-        if (this.x < 0) {
-            this.x = width;
-        } else if (this.x > width) {
-            this.x = 0;
+        if (this.x < 0 || this.x > width) {
+            this.xSpeed = -this.xSpeed; // only changing the direction
         };
 
-        if (this.y < 0) {
-            this.y = height;
-        } else if (this.y > height) {
-            this.y = 0;
+        if (this.y < 0 || this.y > height) {
+            this.ySpeed = -this.ySpeed; // only changing the direction
         };
+
+        // if (this.y < 0) {
+        //     this.y = height;
+        // } else if (this.y > height) {
+        //     this.ySpe = 0;
+        // };
     };
     // making a draw function to draw the ball
     draw () {
@@ -57,6 +62,7 @@ class Ball {
         };
     };
 };
+
 // making a function circle to draw a circle by giving x, y, radius, and filled or not
 function circle(x, y, radius, isFilled) {
     ctx.beginPath();
@@ -68,7 +74,12 @@ function circle(x, y, radius, isFilled) {
     }
 };
 
+// made a new instance of Ball
 var ball = new Ball();
+ball.draw(); // instance method
+ctx.strokeRect(0, 0, width, height);
+// ball.move();
+// ball.draw();
 
 var keyActions = {
     32: "stop", 
@@ -79,9 +90,17 @@ var keyActions = {
 };
 
 // we set direction based on pressed key
-document.addEventListener("keyup", (event) => {
+document.addEventListener("keydown", (event) => {
     ball.setDirection(keyActions[event.keyCode]);
 });
+
+setInterval(()=>{
+    // clear
+    ctx.clearRect(0, 0, width, height); 
+    ball.move(); // changes the ball's x and y position with xSpeed and ySpeed that are changed by setDirection which is called by keyup event handler
+    ball.draw();
+    ctx.strokeRect(0, 0, width, height);    
+}, 30);
 
 
 
