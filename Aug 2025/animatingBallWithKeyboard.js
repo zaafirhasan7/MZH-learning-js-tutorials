@@ -11,8 +11,10 @@ class Ball {
         // assigning ball properties, x, y for ball's position. And xSpeed and ySpeed for ball's moving speed 
         this.x = width / 2;
         this.y = height / 2;
-        this.xSpeed = 2;// only right arrow key
+        this.speed = 1;
+        this.xSpeed = this.speed;// only right arrow key
         this.ySpeed = 0;
+        
     };
     // making move function to help the ball to move and to check if touching any wall.
     // if it touches a wall, it will wrap around the canvas and come out the other side.
@@ -26,10 +28,12 @@ class Ball {
         
         if (this.x < 0 || this.x > width) {
             this.xSpeed = -this.xSpeed; // only changing the direction
+            this.x = this.x + this.xSpeed;
         };
 
         if (this.y < 0 || this.y > height) {
             this.ySpeed = -this.ySpeed; // only changing the direction
+            this.y = this.y + this.ySpeed;
         };
 
         // if (this.y < 0) {
@@ -45,17 +49,17 @@ class Ball {
 
     setDirection (direction) {
         if (direction === "right") {
-            this.xSpeed = 2;
+            this.xSpeed = this.speed;
             this.ySpeed = 0;
         } else if (direction === "left") {
-            this.xSpeed = -2;
+            this.xSpeed = -this.speed;
             this.ySpeed = 0;
         } else if (direction === "up") {
             this.xSpeed = 0;
-            this.ySpeed = -2;
+            this.ySpeed = -this.speed;
         }  else if (direction === "down") {
             this.xSpeed = 0;
-            this.ySpeed = 2;
+            this.ySpeed = this.speed;
         } else if (direction === "stop") {
             this.xSpeed = 0;
             this.ySpeed = 0;
@@ -77,9 +81,6 @@ function circle(x, y, radius, isFilled) {
 // made a new instance of Ball
 var ball = new Ball();
 ball.draw(); // instance method
-ctx.strokeRect(0, 0, width, height);
-// ball.move();
-// ball.draw();
 
 var keyActions = {
     32: "stop", 
@@ -92,6 +93,17 @@ var keyActions = {
 // we set direction based on pressed key
 document.addEventListener("keydown", (event) => {
     ball.setDirection(keyActions[event.keyCode]);
+});
+
+// assign dynamic number to speed from keyboard
+document.addEventListener("keyup", (event) => {
+    var typedKeyInNum = parseInt(event.key);
+       
+    if(!isNaN(typedKeyInNum)){
+        ball.speed = typedKeyInNum;
+        ball.xSpeed = typedKeyInNum;
+    }
+    
 });
 
 setInterval(()=>{
