@@ -14,6 +14,7 @@ class Ball {
         this.speed = 1;
         this.xSpeed = this.speed;// only right arrow key
         this.ySpeed = 0;
+        this.size = 10;
         
     };
     // making move function to help the ball to move and to check if touching any wall.
@@ -44,7 +45,7 @@ class Ball {
     };
     // making a draw function to draw the ball
     draw () {
-        circle(this.x, this.y, 10, true);
+        circle(this.x, this.y, this.size, true);
     };
 
     setDirection (direction) {
@@ -100,11 +101,51 @@ document.addEventListener("keyup", (event) => {
     var typedKeyInNum = parseInt(event.key);
        
     if(!isNaN(typedKeyInNum)){
+        if (typedKeyInNum === 0) {
+            typedKeyInNum = 1;
+        }
         ball.speed = typedKeyInNum;
-        ball.xSpeed = typedKeyInNum;
+        adjustSpeedBasedOnDirection();
     }
     
+    var enteredKey = event.key;
+    if (enteredKey === "x") {
+        ball.speed++;
+        adjustSpeedBasedOnDirection();
+    } else if (enteredKey === "z") {
+        ball.speed--;
+        if(ball.speed <= 0){
+            ball.speed =1;
+        }
+        adjustSpeedBasedOnDirection();
+    } else if (enteredKey === "c") {
+        // increase ball size
+        ball.size++;
+        if (ball.size > 50) {
+            ball.size = 50;
+        };
+    } else if (enteredKey === "v") {
+        ball.size--;
+        if (ball.size <= 0) {
+            ball.size = 1;
+        };
+    };
+    
 });
+
+function adjustSpeedBasedOnDirection () {
+    if (ball.ySpeed > 0) {
+        ball.ySpeed = ball.speed;
+    } else if (ball.ySpeed < 0) {
+        ball.ySpeed = -ball.speed;
+    };
+
+    if (ball.xSpeed > 0) {
+        ball.xSpeed = ball.speed;
+    } else if (ball.xSpeed < 0) {
+        ball.xSpeed = -ball.speed;
+    };
+};
 
 setInterval(()=>{
     // clear
