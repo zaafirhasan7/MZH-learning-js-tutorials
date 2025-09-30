@@ -1,13 +1,3 @@
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-var width = canvas.width; // in pixels
-var height = canvas.height; // in pixels
-
-var blockSize = 10;
-var blocksInWidth = width / blockSize;
-var blocksInHeight = height / blockSize;
-var score = 0;
-
 function drawBorder () {
     ctx.fillStyle = "gray";
     ctx.fillRect(0,0,width,blockSize);
@@ -33,12 +23,27 @@ function gameOver () {
     ctx.fillText("Game Over", width/2, height/2); 
 }
 
-setInterval(()=>{
-    score++;
-    ctx.clearRect(0,0, width, height);
-    drawBorder();
-    scoreDrawer();
-}, 100);
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var width = canvas.width; // in pixels
+var height = canvas.height; // in pixels
 
+var blockSize = 10;
+var blocksInWidth = width / blockSize; // 40
+var blocksInHeight = height / blockSize;
+var score = 0;
 
+var sampleBlock = new Block(9, 10); // col, row
+
+sampleBlock.demoColMovement(ctx, blockSize, "green", height);
+
+// setInterval(()=>{
+//     score++;
+//     ctx.clearRect(0,0, width, height);
+//     drawBorder();
+//     scoreDrawer();
+// }, 100);
+
+drawBorder();
+scoreDrawer();
 // gameOver();
