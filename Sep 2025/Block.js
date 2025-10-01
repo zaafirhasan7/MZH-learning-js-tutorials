@@ -13,30 +13,22 @@ class Block {
 
     // make a function to demo, column moves horizontally
     demoColMovement (ctx, blockSize, color, height) {
-        ctx.fillStyle = color;
         var stepSize = 0;
-        var size = blockSize;
+        var moveDirection = blockSize;
+        var x = blockSize;
+        var y = blockSize;
         setInterval(() => {
-            var x = blockSize;
-            var y = blockSize;
             ctx.fillStyle = color;
             ctx.clearRect(x, y, 38*blockSize, 38*blockSize);
             
             var colStartX = x + stepSize;
+
             ctx.fillRect(colStartX, y, blockSize, height-blockSize*2);
             if(colStartX > 370 || colStartX < blockSize){
-                size = -size;
+                moveDirection = -moveDirection;
             } 
 
-            stepSize+=size;
-            if (stepSize < blockSize){
-                stepSize = blockSize;
-            }
-
-            console.log("size " + size);
-            console.log("stepSize " + stepSize);
-            console.log("colStartX " + colStartX);
-
+            stepSize+=moveDirection;
         }, 200);
     };
     
