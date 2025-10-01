@@ -11,6 +11,15 @@ class Block {
         ctx.fillRect(x, y, blockSize, blockSize);
     };
 
+    drawCircle (ctx, blockSize, color ) {
+        var centerX = this.col * blockSize + blockSize / 2;
+        var centerY = this.row * blockSize + blockSize / 2;
+        ctx.beginPath();
+        ctx.fillStyle = color;
+        ctx.arc(centerX, centerY, blockSize / 2, 0, Math.PI * 2);
+        ctx.fill();
+    };
+
     // make a function to demo, column moves horizontally
     demoColMovement (ctx, blockSize, color, height) {
         var stepSize = 0;

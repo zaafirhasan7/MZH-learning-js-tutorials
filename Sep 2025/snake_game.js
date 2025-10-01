@@ -33,10 +33,28 @@ var blocksInWidth = width / blockSize; // 40
 var blocksInHeight = height / blockSize;
 var score = 0;
 
-var sampleBlock = new Block(9, 10); // col, row
+var sampleCircle = new Block(9, 10); // apple
 
-sampleBlock.demoColMovement(ctx, blockSize, "green", height);
+// snake
+var sampleBlock2 = new Block (10, 11);
+var sampleBlock3 = new Block (11, 11);
+var sampleBlock4 = new Block (12, 11);
+var sampleBlock5 = new Block (13, 11);
+var sampleBlock6 = new Block (14, 11);
+var sampleBlock7 = new Block (15, 11);
+var sampleBlock8 = new Block (16, 11);
+var sampleBlock9 = new Block (17, 11);
 
+sampleCircle.drawCircle(ctx, blockSize, "maroon");
+
+sampleBlock2.drawSquare(ctx, blockSize, "green");
+sampleBlock3.drawSquare(ctx, blockSize, "green");
+sampleBlock4.drawSquare(ctx, blockSize, "green");
+sampleBlock5.drawSquare(ctx, blockSize, "green");
+sampleBlock6.drawSquare(ctx, blockSize, "green");
+sampleBlock7.drawSquare(ctx, blockSize, "green");
+sampleBlock8.drawSquare(ctx, blockSize, "green");
+sampleBlock9.drawSquare(ctx, blockSize, "green");
 // setInterval(()=>{
 //     score++;
 //     ctx.clearRect(0,0, width, height);
