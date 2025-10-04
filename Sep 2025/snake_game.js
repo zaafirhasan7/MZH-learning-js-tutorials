@@ -37,7 +37,7 @@ var sampleCircle = new Block(9, 10); // apple
 
 // snake
 var sampleBlock = new Block (11, 30);
-var anotherBlock = new Block (11, 31);
+var anotherBlock = new Block (10, 20);
 console.log(sampleBlock.equal(anotherBlock));
 
 sampleCircle.drawCircle(ctx, blockSize, "maroon");

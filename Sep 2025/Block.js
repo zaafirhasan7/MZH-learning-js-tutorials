@@ -42,14 +42,18 @@ class Block {
     };
     
     equal (anotherBlock) {
-        // 10 !== 11 && 30 !== 31 (both not same)
-        // 10 !== 11 && 30 !== 30 (col not same)
-        // 10 !== 10 && 30 !== 31 (row not same)
-        if (this.col !== anotherBlock.col || this.row !== anotherBlock.row) {
-            return false;
-        }
-        
-        return true;
+        // col or row, if any of them are not equal,
+        // then we know the two blocks are not same positioned.
+        // if (this.col !== anotherBlock.col || this.row !== anotherBlock.row) {
+        //     return false;
+        // }
+
+        // from here everything is true case
+        // return true;
+
+        return this.col === anotherBlock.col  &&
+                this.row === anotherBlock;
+
     };
 
     
