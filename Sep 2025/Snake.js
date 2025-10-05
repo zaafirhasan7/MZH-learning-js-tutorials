@@ -8,5 +8,12 @@ class Snake {
 
         this.direction = "right";
         this.nextDirection = "right";
-    }
+    };
+
+    draw (ctx, blockSize, color) {
+        for (var i = 0; i < this.segments.length; i++) {
+            this.segments[i].drawSquare(ctx, blockSize, color);
+        };
+    };
+
 };
