@@ -16,7 +16,7 @@ class Snake {
         };
     };
 
-    move () {
+    move (score) {
         var head = this.segments[0];
         var newHead;
         this.direction = this.nextDirection;
@@ -29,6 +29,27 @@ class Snake {
         } else if (this.direction === "down") {
             newHead = new Block (head.col, head.row+1);
         }
+
+        // collision checking
+        if (this.checkCollision(newHead)) {
+            gameOver();
+            return;
+        }
+        
+        // use the newHead(adding as the first element of the array)
+        this.segments.unshift(newHead);
+
+        // if apple : score increases, apple changes position
+        // if no apple: delete the tail
+        if(newHead.equal(apple.position)) {
+            score++;
+            apple.move();
+        } else {
+            this.segments.pop();
+        }
+
     };
+
+
 
 };
