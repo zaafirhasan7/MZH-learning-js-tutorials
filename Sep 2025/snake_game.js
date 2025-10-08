@@ -41,18 +41,28 @@ console.log(sampleBlock.equal(anotherBlock));
 
 sampleCircle.drawCircle(ctx, blockSize, "maroon");
 sampleBlock.drawSquare(ctx, blockSize, "green");
-// setInterval(()=>{
-//     score++;
-//     ctx.clearRect(0,0, width, height);
-//     drawBorder();
-//     scoreDrawer();
-// }, 100);
 
 drawBorder();
 scoreDrawer();
 
-// gameOver();
 
 var snake = new Snake ();
 
 snake.draw(ctx, blockSize, "blue");
+
+document.addEventListener("keydown", (event) => {
+    var direction = event.key;
+    console.log(direction);
+    var directionObj = {
+        "ArrowUp" : "up",
+        "ArrowDown" : "down",
+        "ArrowLeft" : "left",
+        "ArrowRight" : "right"
+    };
+    
+    
+    if (direction in directionObj) {
+        console.log(directionObj[direction]);
+        snake.setDirection(directionObj[direction]);
+    }
+});
