@@ -1,10 +1,11 @@
 class Snake {
     constructor () {
         this.segments = [
-            new Block(7,5),
+            new Block(7,5), // head
             new Block(6,5),
             new Block(5,5)
         ];
+
 
         this.direction = "right";
         this.nextDirection = "right";
@@ -50,6 +51,22 @@ class Snake {
 
     };
 
+    checkCollision (newHead) {
+        // compare with body
+        for (var i = 0; i < this.segments.length; i++) {
+            if (newHead.equal(this.segments[i])) {
+                return true;
+            }
+        }
+
+        // compare with borders (right, bottom, left, up)
+        var rightCollision = blocksInWidth-1 === newHead.col;
+        var bottomCollision = blocksInHeight-1 === newHead.row;
+        var leftCollision = 0 === newHead.col;
+        var topCollision = 0 === newHead.row;
+
+        return rightCollision || bottomCollision || leftCollision || topCollision; // (FFTF->T)
+    };
 
 
 };
