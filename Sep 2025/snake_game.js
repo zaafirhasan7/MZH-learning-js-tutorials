@@ -60,9 +60,10 @@ document.addEventListener("keydown", (event) => {
         "ArrowRight" : "right"
     };
     
-    
     if (direction in directionObj) {
-        console.log(directionObj[direction]);
-        snake.setDirection(directionObj[direction]);
+        var directionFromUser = directionObj[direction];
+        console.log(directionFromUser);
+        
+        snake.setDirection(directionFromUser);
     }
 });
