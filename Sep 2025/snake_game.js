@@ -33,26 +33,16 @@ var blocksInWidth = width / blockSize; // 40
 var blocksInHeight = height / blockSize;
 var score = 0;
 
-var sampleCircle = new Block(9, 10); // apple
-
-var sampleBlock = new Block (11, 30);
-var anotherBlock = new Block (10, 20);
-console.log(sampleBlock.equal(anotherBlock));
-
-sampleCircle.drawCircle(ctx, blockSize, "maroon");
-sampleBlock.drawSquare(ctx, blockSize, "green");
-
 drawBorder();
 scoreDrawer();
 
+var snake = new Snake();
+var apple = new Apple();
+apple.draw(ctx, blockSize);
 
-var snake = new Snake ();
-
-snake.draw(ctx, blockSize, "blue");
 
 document.addEventListener("keydown", (event) => {
     var direction = event.key;
-    console.log(direction);
     var directionObj = {
         "ArrowUp" : "up",
         "ArrowDown" : "down",
@@ -62,8 +52,6 @@ document.addEventListener("keydown", (event) => {
     
     if (direction in directionObj) {
         var directionFromUser = directionObj[direction];
-        console.log(directionFromUser);
-        
         snake.setDirection(directionFromUser);
     }
 });
