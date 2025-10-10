@@ -68,5 +68,7 @@ class Snake {
         return rightCollision || bottomCollision || leftCollision || topCollision; // (FFTF->T)
     };
 
-
+    setDirection (newDirection){
+        this.nextDirection = newDirection; 
+    }
 };
